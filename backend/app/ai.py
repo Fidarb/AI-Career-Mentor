@@ -33,7 +33,7 @@ Career Goal:
     }
 
     payload = {
-        "model": "meta-llama/llama-3.3-8b-instruct:free",
+        "model": "mistralai/mistral-7b-instruct:free",
         "messages": [
             {
                 "role": "user",
