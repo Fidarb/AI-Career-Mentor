@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef4ff, #dbeafe);
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 750px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+    text-align: center;
+    color: #2563eb;
+    margin-bottom: 10px;
+    font-size: 36px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+input,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #222;
+    background: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+button:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+.response {
+    margin-top: 35px;
+}
+
+.response h2 {
+    color: #2563eb;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ===== AI Report Styling ===== */
+
+.report-box {
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.report-heading {
+    color: #2563eb;
+    font-size: 22px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #dbeafe;
+    padding-bottom: 6px;
+}
+
+.report-subheading {
+    color: #1d4ed8;
+    font-size: 18px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+}
+
+.report-list {
+    margin: 10px 0 20px 25px;
+    padding-left: 15px;
+}
+
+.report-list li {
+    color: #334155;
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+
+.report-paragraph {
+    color: #334155;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+}
