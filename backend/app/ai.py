@@ -50,7 +50,10 @@ Career Goal:
             timeout=60
         )
 
-        response.raise_for_status()
+        if not response.ok:
+            print("STATUS:", response.status_code)
+            print("BODY:", response.text)
+            return response.text
 
         result = response.json()
 
