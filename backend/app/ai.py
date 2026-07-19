@@ -33,7 +33,7 @@ Career Goal:
     }
 
     payload = {
-        "model": "openrouter/free",
+        "model": "meta-llama/llama-3.3-8b-instruct:free",
         "messages": [
             {
                 "role": "user",
@@ -58,4 +58,5 @@ Career Goal:
         return result["choices"][0]["message"]["content"]
 
     except Exception as e:
-        return f"Error generating AI response: {str(e)}"
+    print(response.text if 'response' in locals() else e)
+    raise
