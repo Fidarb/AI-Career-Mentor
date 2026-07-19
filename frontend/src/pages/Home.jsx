@@ -16,7 +16,7 @@ function Home() {
     setResponse("");
 
     try {
-      const res = await fetch(https://ai-career-mentor-backend-7bl6.onrender.com, {
+      const res = await fetch("https://ai-career-mentor-backend-7bl6.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
