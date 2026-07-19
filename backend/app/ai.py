@@ -43,19 +43,19 @@ Career Goal:
     }
 
     try:
-    response = requests.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        headers=headers,
-        json=payload,
-        timeout=60
-    )
+        response = requests.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=60
+        )
 
-    response.raise_for_status()
+        response.raise_for_status()
 
-    result = response.json()
+        result = response.json()
 
-    return result["choices"][0]["message"]["content"]
+        return result["choices"][0]["message"]["content"]
 
-except Exception as e:
-    print(e)
-    return f"Error generating AI response: {str(e)}"
+    except Exception as e:
+        print(e)
+        return f"Error generating AI response: {str(e)}"
