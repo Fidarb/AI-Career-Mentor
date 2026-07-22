@@ -1,12 +1,11 @@
-import google.generativeai as genai
+from google import genai
+import traceback
 
 from app.config import GEMINI_API_KEY
 from app.prompts import CAREER_PROMPT
 from app.services.logger import log_request
 
-genai.configure(api_key=GEMINI_API_KEY)
-
-model = genai.GenerativeModel("gemini-1.5-flash")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 
 def generate_career_advice(data):
@@ -32,7 +31,13 @@ Career Goal:
 """
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-flash-latest",
+            contents=prompt,
+        )
+
         return response.text
-    except Exception as e:
-        return f"Error: {str(e)}"
+
+    except Exception:
+        traceback.print_exc()
+        return "Error generating AI response."
