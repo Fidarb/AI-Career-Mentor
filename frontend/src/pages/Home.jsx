@@ -2,6 +2,7 @@ import { useState } from "react";
 import { jsPDF } from "jspdf";
 import "./Home.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 function Home() {
   const [name, setName] = useState("");
   const [skills, setSkills] = useState("");
@@ -16,20 +17,19 @@ function Home() {
     setResponse("");
 
     try {
-      const res = await fetch("https://ai-career-mentor-backend-7bl6.onrender.com/career", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          skills,
-          interests,
-          education,
-          goal,
-        }),
-      });
-
+      const res = await fetch(`${API_URL}/career`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name,
+    skills,
+    interests,
+    education,
+    goal,
+  }),
+});
       const data = await res.json();
       setResponse(data.answer);
     } catch (error) {
@@ -132,13 +132,14 @@ function Home() {
     <div className="container">
       <div className="card">
 
-        <h1>🤖 AI Career Mentor</h1>
+       <h1>🤖 AI Career Mentor</h1>
 
-        <p className="subtitle">
-          Get personalized career guidance using Artificial Intelligence.
-        </p>
+<p className="subtitle">
+  Discover your ideal career path with AI-powered insights,
+  personalized recommendations, and a professional career roadmap.
+</p>
 
-        <label>Full Name</label>
+        <label>👤 Full Name</label>
         <input
           type="text"
           placeholder="Enter your name"
@@ -146,21 +147,21 @@ function Home() {
           onChange={(e) => setName(e.target.value)}
         />
 
-        <label>Skills</label>
+        <label>💻 Skills</label>
         <textarea
           placeholder="Python, SQL, Machine Learning..."
           value={skills}
           onChange={(e) => setSkills(e.target.value)}
         />
 
-        <label>Interests</label>
+        <label>❤️ Interests</label>
         <textarea
           placeholder="Artificial Intelligence, Data Science..."
           value={interests}
           onChange={(e) => setInterests(e.target.value)}
         />
 
-        <label>Education</label>
+        <label>🎓 Education</label>
         <input
           type="text"
           placeholder="B.Tech AI & DS"
@@ -168,7 +169,7 @@ function Home() {
           onChange={(e) => setEducation(e.target.value)}
         />
 
-        <label>Career Goal</label>
+        <label>🎯 Career Goal</label>
         <input
           type="text"
           placeholder="Become an AI Engineer"
@@ -179,12 +180,12 @@ function Home() {
         <button onClick={handleSubmit} disabled={loading}>
           {loading
             ? "⏳ Generating Career Advice..."
-            : "🚀 Generate Career Advice"}
+            : "✨ Generate AI Career Report"}
         </button>
 
         {response && (
   <div className="response">
-    <h2>🤖 AI Career Report</h2>
+    <h2>📊 Your Personalized Career Report</h2>
 
     <div className="report-box">
       {formatResponse(response)}
