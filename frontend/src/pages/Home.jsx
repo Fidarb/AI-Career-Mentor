@@ -2,7 +2,7 @@ import { useState } from "react";
 import { jsPDF } from "jspdf";
 import "./Home.css";
 
-const API_URL = "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_URL;
 function Home() {
   const [name, setName] = useState("");
   const [skills, setSkills] = useState("");
