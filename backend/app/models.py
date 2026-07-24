@@ -6,4 +6,6 @@ class CareerRequest(BaseModel):
     skills: str
     interests: str
     education: str
+    studyYear: str
+    certifications: str
     goal: str

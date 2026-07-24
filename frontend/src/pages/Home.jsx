@@ -2,12 +2,14 @@ import { useState } from "react";
 import { jsPDF } from "jspdf";
 import "./Home.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "http://localhost:8000";
 function Home() {
   const [name, setName] = useState("");
   const [skills, setSkills] = useState("");
   const [interests, setInterests] = useState("");
   const [education, setEducation] = useState("");
+  const [studyYear, setStudyYear] = useState("");
+  const [certifications, setCertifications] = useState("");
   const [goal, setGoal] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ function Home() {
     setResponse("");
 
     try {
-      const res = await fetch(`${API_URL}/career`, {
+    const res = await fetch(`${API_URL}/career`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -27,10 +29,14 @@ function Home() {
     skills,
     interests,
     education,
+    studyYear,
+    certifications,
     goal,
   }),
 });
-      const data = await res.json();
+
+const data = await res.json();
+      
       setResponse(data.answer);
     } catch (error) {
       console.error(error);
@@ -43,25 +49,53 @@ function Home() {
   const downloadPDF = () => {
   const doc = new jsPDF();
 
+  const pageHeight = doc.internal.pageSize.height;
+  const margin = 20;
+  const lineHeight = 7;
+  let y = 20;
+
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
   doc.setTextColor(37, 99, 235);
-  doc.text("AI Career Mentor Report", 20, 20);
+  doc.text("AI Career Mentor Report", margin, y);
+
+  y += 15;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
   doc.setTextColor(0, 0, 0);
 
-  doc.text(`Name: ${name}`, 20, 35);
-  doc.text(`Education: ${education}`, 20, 43);
-  doc.text(`Career Goal: ${goal}`, 20, 51);
+  doc.text(`Name: ${name}`, margin, y);
+  y += lineHeight;
+
+  doc.text(`Education: ${education}`, margin, y);
+  y += lineHeight;
+
+  doc.text(`Current Year: ${studyYear}`, margin, y);
+  y += lineHeight;
+
+  doc.text(`Certifications: ${certifications}`, margin, y);
+  y += lineHeight;
+
+  doc.text(`Career Goal: ${goal}`, margin, y);
+  y += 10;
 
   doc.setDrawColor(37, 99, 235);
-  doc.line(20, 58, 190, 58);
+  doc.line(margin, y, 190, y);
+
+  y += 10;
 
   const lines = doc.splitTextToSize(response, 170);
 
-  doc.text(lines, 20, 68);
+  lines.forEach((line) => {
+    if (y > pageHeight - 20) {
+      doc.addPage();
+      y = 20;
+    }
+
+    doc.text(line, margin, y);
+    y += lineHeight;
+  });
 
   doc.save(`${name || "Career"}_Report.pdf`);
 };
@@ -127,6 +161,7 @@ function Home() {
 
   return elements;
 };
+    
 
   return (
     <div className="container">
@@ -168,6 +203,28 @@ function Home() {
           value={education}
           onChange={(e) => setEducation(e.target.value)}
         />
+        <label>📚 Current Year of Study</label>
+
+         <select
+         value={studyYear}
+         onChange={(e) => setStudyYear(e.target.value)}
+>
+        <option value="" disabled>Select Year</option>
+        <option>1st Year</option>
+        <option>2nd Year</option>
+        <option>3rd Year</option>
+        <option>4th Year</option>
+        <option>Graduate</option>
+        <option>Working Professional</option>
+</select>
+
+<label>🏆 Certifications</label>
+
+<textarea
+  placeholder="Google Data Analytics, AWS Cloud Practitioner..."
+  value={certifications}
+  onChange={(e) => setCertifications(e.target.value)}
+/>
 
         <label>🎯 Career Goal</label>
         <input
@@ -179,7 +236,7 @@ function Home() {
 
         <button onClick={handleSubmit} disabled={loading}>
           {loading
-            ? "⏳ Generating Career Advice..."
+            ? "⏳ Generating AI Career Report..."
             : "✨ Generate AI Career Report"}
         </button>
 

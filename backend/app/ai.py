@@ -17,14 +17,20 @@ def generate_career_advice(data):
 Student Name:
 {data.name}
 
+Education:
+{data.education}
+
+Current Year of Study:
+{data.studyYear}
+
 Skills:
 {data.skills}
 
 Interests:
 {data.interests}
 
-Education:
-{data.education}
+Certifications:
+{data.certifications}
 
 Career Goal:
 {data.goal}
